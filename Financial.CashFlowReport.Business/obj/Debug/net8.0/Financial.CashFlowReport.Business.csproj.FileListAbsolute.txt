@@ -1,0 +1,17 @@
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\bin\Debug\net8.0\Financial.CashFlowReport.Business.deps.json
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\bin\Debug\net8.0\Financial.CashFlowReport.Business.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\bin\Debug\net8.0\Financial.CashFlowReport.Business.pdb
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\bin\Debug\net8.0\Financeiro.CashFlowReport.DataModel.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\bin\Debug\net8.0\Financial.CashFlowReport.Sdk.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\bin\Debug\net8.0\Financeiro.CashFlowReport.DataModel.pdb
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\bin\Debug\net8.0\Financial.CashFlowReport.Sdk.pdb
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financial.CashFlowReport.Business.csproj.AssemblyReference.cache
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financial.CashFlowReport.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financial.CashFlowReport.Business.AssemblyInfoInputs.cache
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financial.CashFlowReport.Business.AssemblyInfo.cs
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financial.CashFlowReport.Business.csproj.CoreCompileInputs.cache
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financia.F9C9820B.Up2Date
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financial.CashFlowReport.Business.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\refint\Financial.CashFlowReport.Business.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\Financial.CashFlowReport.Business.pdb
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financial.CashFlowReport.Business\obj\Debug\net8.0\ref\Financial.CashFlowReport.Business.dll

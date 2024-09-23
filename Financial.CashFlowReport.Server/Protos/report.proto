@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Financial.CashFlowReport.Server.Protos";
+
+// Definição de mensagens para o serviço de Consolidação Diária
+message RelatorioRequest {
+  string data = 1; // Data para gerar o relatório 
+}
+
+message RelatorioResponse {
+  string data = 1; // Data do relatório consolidado
+  double saldo_total = 2; // Saldo total do dia (consolidado)
+  repeated Lancamento relatorio_lancamentos = 3; // Lista dos lançamentos consolidados
+}
+
+message Lancamento {
+  string id = 1; // ID do lançamento
+  string tipo = 2; // Tipo do lançamento: "debito" ou "credito"
+  double valor = 3; // Valor do lançamento
+  string descricao = 4; // Descrição do lançamento
+  string data = 5; // Data do lançamento 
+}
+
+// Serviço para geração de relatórios consolidados (Consultas)
+service RelatorioService {
+  // Obter o relatório diário consolidado de lançamentos
+  rpc ObterRelatorioConsolidado (RelatorioRequest) returns (RelatorioResponse);
+}

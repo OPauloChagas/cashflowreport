@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Financial.CashFlowReport.Server.props" />
+</Project>

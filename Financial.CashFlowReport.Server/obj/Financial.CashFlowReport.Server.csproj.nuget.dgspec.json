@@ -1,0 +1,167 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Server\\Financial.CashFlowReport.Server.csproj": {}
+  },
+  "projects": {
+    "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financeiro.CashFlowReport.DataModel\\Financeiro.CashFlowReport.DataModel.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financeiro.CashFlowReport.DataModel\\Financeiro.CashFlowReport.DataModel.csproj",
+        "projectName": "Financeiro.CashFlowReport.DataModel",
+        "projectPath": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financeiro.CashFlowReport.DataModel\\Financeiro.CashFlowReport.DataModel.csproj",
+        "packagesPath": "C:\\Users\\Paulo Chagas\\.nuget\\packages\\",
+        "outputPath": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financeiro.CashFlowReport.DataModel\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Paulo Chagas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/GrupoSC/GSCLabs-Squad-Portais/_packaging/KraftSales.API.Packages/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.29.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Server\\Financial.CashFlowReport.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Server\\Financial.CashFlowReport.Server.csproj",
+        "projectName": "Financial.CashFlowReport.Server",
+        "projectPath": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Server\\Financial.CashFlowReport.Server.csproj",
+        "packagesPath": "C:\\Users\\Paulo Chagas\\.nuget\\packages\\",
+        "outputPath": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Paulo Chagas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/GrupoSC/GSCLabs-Squad-Portais/_packaging/KraftSales.API.Packages/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financeiro.CashFlowReport.DataModel\\Financeiro.CashFlowReport.DataModel.csproj": {
+                "projectPath": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financeiro.CashFlowReport.DataModel\\Financeiro.CashFlowReport.DataModel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Grpc.AspNetCore": {
+              "target": "Package",
+              "version": "[2.57.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.29.0, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

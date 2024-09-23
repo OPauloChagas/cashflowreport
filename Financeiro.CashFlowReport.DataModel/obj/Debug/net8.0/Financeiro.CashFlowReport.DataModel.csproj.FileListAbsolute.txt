@@ -1,0 +1,12 @@
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\bin\Debug\net8.0\Financeiro.CashFlowReport.DataModel.deps.json
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\bin\Debug\net8.0\Financeiro.CashFlowReport.DataModel.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\bin\Debug\net8.0\Financeiro.CashFlowReport.DataModel.pdb
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\Financeiro.CashFlowReport.DataModel.csproj.AssemblyReference.cache
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\Financeiro.CashFlowReport.DataModel.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\Financeiro.CashFlowReport.DataModel.AssemblyInfoInputs.cache
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\Financeiro.CashFlowReport.DataModel.AssemblyInfo.cs
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\Financeiro.CashFlowReport.DataModel.csproj.CoreCompileInputs.cache
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\Financeiro.CashFlowReport.DataModel.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\refint\Financeiro.CashFlowReport.DataModel.dll
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\Financeiro.CashFlowReport.DataModel.pdb
+D:\Projetos\BancoCarrefour\Financial.CashFlowReport.API\Financeiro.CashFlowReport.DataModel\obj\Debug\net8.0\ref\Financeiro.CashFlowReport.DataModel.dll
