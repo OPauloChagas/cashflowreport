@@ -37,7 +37,7 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
             _logger.LogInformation("Iniciando o consumo de mensagens de RabbitMQ.");
             _rabbitMQConsumer.StartConsuming("queue_consolidacao_diaria", ProcessMessage);
         }
-          
+
         private void ProcessMessage(string message)
         {
             _logger.LogInformation($"Mensagem recebida de RabbitMQ: {message}");
@@ -51,20 +51,33 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
 
                     var novoLancamento = new LancamentoDataModel
                     {
-                        Id = Guid.NewGuid(),
+                        Id = lancamento.Id, 
                         Tipo = lancamento.Tipo,
                         Valor = lancamento.Valor,
                         Descricao = lancamento.Descricao,
                         Data = lancamento.Data
                     };
 
-                    _relatorioCollection.UpdateOne(
-                         Builders<RelatorioDiario>.Filter.Eq(r => r.Data, lancamento.Data), 
-                         Builders<RelatorioDiario>.Update.Push(r => r.Lancamentos, novoLancamento), 
-                         new UpdateOptions { IsUpsert = true } 
-                     );
+                    var filtro = Builders<RelatorioDiario>.Filter.Eq(r => r.Data, lancamento.Data);
 
-                    _logger.LogInformation("Lançamento salvo com sucesso no MongoDB.");
+                    var updateLancamento = Builders<RelatorioDiario>.Update.Push(r => r.Lancamentos, novoLancamento);
+
+                    _relatorioCollection.UpdateOne(filtro, updateLancamento, new UpdateOptions { IsUpsert = true });
+
+                    var relatorio = _relatorioCollection.Find(filtro).FirstOrDefault();
+                    if (relatorio != null)
+                    {
+                        var totalCreditos = relatorio.Lancamentos.Where(l => l.Tipo == "credito").Sum(l => l.Valor);
+                        var totalDebitos = relatorio.Lancamentos.Where(l => l.Tipo == "debito").Sum(l => l.Valor);
+
+                        var updateTotais = Builders<RelatorioDiario>.Update
+                            .Set(r => r.TotalCreditos, totalCreditos)
+                            .Set(r => r.TotalDebitos, totalDebitos);
+
+                        _relatorioCollection.UpdateOne(filtro, updateTotais);
+                    }
+
+                    _logger.LogInformation("Lançamento e totais salvos com sucesso no MongoDB.");
                 }
                 else
                 {
@@ -76,6 +89,7 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
                 _logger.LogError(ex, "Erro ao processar mensagem recebida de RabbitMQ.");
             }
         }
+
 
         public async Task<ConsolidacaoDiariaResponse> Handle(ConsolidacaoDiariaCommand request, CancellationToken cancellationToken)
         {
@@ -106,19 +120,24 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
                         }).ToList()
                     };
 
+                    var lancamentosConsolidados = grpcResponse.RelatorioLancamentos.Select(l => new LancamentoDataModel
+                    {
+                        Id = Guid.NewGuid(), // Usando o mesmo Id do gRPC
+                        Tipo = l.Tipo,
+                        Valor = l.Valor,
+                        Descricao = l.Descricao,
+                        Data = l.Data
+                    }).ToList();
+
+                    var totalCreditos = lancamentosConsolidados.Where(l => l.Tipo == "credito").Sum(l => l.Valor);
+                    var totalDebitos = lancamentosConsolidados.Where(l => l.Tipo == "debito").Sum(l => l.Valor);
+
                     var novoRelatorioDiario = new RelatorioDiario
                     {
                         Data = grpcResponse.Data,
-                        TotalCreditos = grpcResponse.RelatorioLancamentos.Where(l => l.Tipo == "credito").Sum(l => l.Valor),
-                        TotalDebitos = grpcResponse.RelatorioLancamentos.Where(l => l.Tipo == "debito").Sum(l => l.Valor),
-                        Lancamentos = grpcResponse.RelatorioLancamentos.Select(l => new LancamentoDataModel
-                        {
-                            Id = Guid.NewGuid(),
-                            Tipo = l.Tipo,
-                            Valor = l.Valor,
-                            Descricao = l.Descricao,
-                            Data = l.Data
-                        }).ToList()
+                        TotalCreditos = totalCreditos,
+                        TotalDebitos = totalDebitos,
+                        Lancamentos = lancamentosConsolidados
                     };
 
                     await _relatorioCollection.InsertOneAsync(novoRelatorioDiario, cancellationToken);
@@ -126,10 +145,9 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
                     return consolidacaoResponse;
                 }
 
-                // retorna o saldo consolidado
+                // Calcula o saldo consolidado a partir do MongoDB
                 var saldoConsolidado = relatorioDiario.TotalCreditos - relatorioDiario.TotalDebitos;
 
-                // Retorna o relatório consolidado do MongoDB
                 return new ConsolidacaoDiariaResponse
                 {
                     Data = relatorioDiario.Data,

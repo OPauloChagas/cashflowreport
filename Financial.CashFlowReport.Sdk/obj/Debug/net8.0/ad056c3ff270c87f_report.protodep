@@ -1,3 +1,0 @@
-obj\Debug\net8.0/Report.cs \
-obj\Debug\net8.0/ReportGrpc.cs: C:/Users/Paulo Chagas/.nuget/packages/grpc.tools/2.66.0/build/native/include/google/protobuf/empty.proto\
- ../Financial.CashFlowReport.Server/Protos/report.proto

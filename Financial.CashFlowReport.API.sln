@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.CashFlowReport.API", "Financial.CashFlowReport.API\Financial.CashFlowReport.API.csproj", "{B6C6769A-D834-4FD9-B2F8-24D7A1E9EA37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.CashFlowReport.API", "Financial.CashFlowReport.API\Financial.CashFlowReport.API.csproj", "{B6C6769A-D834-4FD9-B2F8-24D7A1E9EA37}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A391D321-5448-4C95-AF6D-8764597586FE}"
 EndProject
@@ -11,13 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CashFlowReport", "CashFlowR
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sdk", "Sdk", "{C5747F5D-B70B-4CBD-AB7E-A587DADAE9EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.CashFlowReport.Sdk", "Financial.CashFlowReport.Sdk\Financial.CashFlowReport.Sdk.csproj", "{D0BEFFCC-4DD3-40BF-A60D-89F0D214E1FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.CashFlowReport.Sdk", "Financial.CashFlowReport.Sdk\Financial.CashFlowReport.Sdk.csproj", "{D0BEFFCC-4DD3-40BF-A60D-89F0D214E1FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.CashFlowReport.Server", "Financial.CashFlowReport.Server\Financial.CashFlowReport.Server.csproj", "{2193D4F0-1A14-43EC-ACBE-57E3B6FECA46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.CashFlowReport.Server", "Financial.CashFlowReport.Server\Financial.CashFlowReport.Server.csproj", "{2193D4F0-1A14-43EC-ACBE-57E3B6FECA46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.CashFlowReport.Business", "Financial.CashFlowReport.Business\Financial.CashFlowReport.Business.csproj", "{49C1929A-F87C-40E9-98E0-3483097182AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.CashFlowReport.Business", "Financial.CashFlowReport.Business\Financial.CashFlowReport.Business.csproj", "{49C1929A-F87C-40E9-98E0-3483097182AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financeiro.CashFlowReport.DataModel", "Financeiro.CashFlowReport.DataModel\Financeiro.CashFlowReport.DataModel.csproj", "{CA6EEB8C-7E17-4032-B3DE-FB9C7AA6BE78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financeiro.CashFlowReport.DataModel", "Financeiro.CashFlowReport.DataModel\Financeiro.CashFlowReport.DataModel.csproj", "{CA6EEB8C-7E17-4032-B3DE-FB9C7AA6BE78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CashFlowReportTests", "CashFlowReportTests", "{BD6468DE-41EE-4ABA-8889-8629E7880A7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.CashflowReport.Tests", "Financial.CashflowReport.Tests\Financial.CashflowReport.Tests.csproj", "{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,10 @@ Global
 		{CA6EEB8C-7E17-4032-B3DE-FB9C7AA6BE78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA6EEB8C-7E17-4032-B3DE-FB9C7AA6BE78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA6EEB8C-7E17-4032-B3DE-FB9C7AA6BE78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,8 @@ Global
 		{2193D4F0-1A14-43EC-ACBE-57E3B6FECA46} = {46968ABD-A4AA-4FA6-B5B5-1568BD953993}
 		{49C1929A-F87C-40E9-98E0-3483097182AD} = {46968ABD-A4AA-4FA6-B5B5-1568BD953993}
 		{CA6EEB8C-7E17-4032-B3DE-FB9C7AA6BE78} = {46968ABD-A4AA-4FA6-B5B5-1568BD953993}
+		{BD6468DE-41EE-4ABA-8889-8629E7880A7D} = {A391D321-5448-4C95-AF6D-8764597586FE}
+		{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB} = {BD6468DE-41EE-4ABA-8889-8629E7880A7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46824E35-937A-44FE-BA70-0B73D45958A1}
