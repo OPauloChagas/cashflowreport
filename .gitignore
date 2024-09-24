@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Financial.CashFlowReport.API/DesignTimeBuild/.dtbcache.v2
+/.vs/Financial.CashFlowReport.API/FileContentIndex/3889b568-6d55-40e8-bbe3-ddd7ca5ba6cb.vsidx
+/.vs/Financial.CashFlowReport.API/FileContentIndex/3fe04bf3-2634-416d-bfd1-8b2e14f59fb3.vsidx
+/.vs/Financial.CashFlowReport.API/FileContentIndex/b010f0a5-14f6-4456-8343-1cc19cd18c11.vsidx
+/.vs/Financial.CashFlowReport.API/FileContentIndex/c7154f83-c4e7-4bd4-a247-4f0442abc84e.vsidx
+/Financeiro.CashFlowReport.DataModel/bin/Debug/net8.0/Financeiro.CashFlowReport.DataModel.deps.json
+/Financeiro.CashFlowReport.DataModel/bin/Debug/net8.0/Financeiro.CashFlowReport.DataModel.dll
+/Financeiro.CashFlowReport.DataModel/bin/Debug/net8.0/Financeiro.CashFlowReport.DataModel.pdb
+/Financeiro.CashFlowReport.DataModel/obj/project.nuget.cache
+/Financial.CashflowReport.Tests/obj
