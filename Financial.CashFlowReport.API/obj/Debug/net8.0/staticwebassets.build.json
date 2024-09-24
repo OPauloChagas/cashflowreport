@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "Ums3OFxp3eCvJxPDS8HUHVWy2CW6e/cACCJo3Vi/u00=",
+  "Source": "Financial.CashFlowReport.API",
+  "BasePath": "_content/Financial.CashFlowReport.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Server\\Financial.CashFlowReport.Server.csproj",
+      "Version": 2,
+      "Source": "Financial.CashFlowReport.Server",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
