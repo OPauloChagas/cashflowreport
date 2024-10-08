@@ -1,19 +1,79 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
 
-/.vs/Financial.CashFlowReport.API/DesignTimeBuild/.dtbcache.v2
-/.vs/Financial.CashFlowReport.API/FileContentIndex/3889b568-6d55-40e8-bbe3-ddd7ca5ba6cb.vsidx
-/.vs/Financial.CashFlowReport.API/FileContentIndex/3fe04bf3-2634-416d-bfd1-8b2e14f59fb3.vsidx
-/.vs/Financial.CashFlowReport.API/FileContentIndex/b010f0a5-14f6-4456-8343-1cc19cd18c11.vsidx
-/.vs/Financial.CashFlowReport.API/FileContentIndex/c7154f83-c4e7-4bd4-a247-4f0442abc84e.vsidx
-/Financeiro.CashFlowReport.DataModel/bin/Debug/net8.0/Financeiro.CashFlowReport.DataModel.deps.json
-/Financeiro.CashFlowReport.DataModel/bin/Debug/net8.0/Financeiro.CashFlowReport.DataModel.dll
-/Financeiro.CashFlowReport.DataModel/bin/Debug/net8.0/Financeiro.CashFlowReport.DataModel.pdb
-/Financeiro.CashFlowReport.DataModel/obj/project.nuget.cache
-/Financial.CashflowReport.Tests/obj
-/.vs/Financial.CashFlowReport.API/FileContentIndex
-/.vs/Financial.CashFlowReport.API/v17/.suo
-/Financeiro.CashFlowReport.DataModel/obj/Debug/net8.0/ref
-/Financeiro.CashFlowReport.DataModel/obj/Debug/net8.0/refint
-/Financial.CashflowReport.Tests/bin/Debug/net8.0
+## Ignore Visual Studio folders
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Ignore build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+
+# NuGet
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Ignore packages folder
+packages/
+
+# Ignore project debug and release directories
+## Debug and Release
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]ppPackages/
+[Tt]est[Rr]esult*/
+
+
+# Ignore ReSharper files
+_ReSharper*/
+
+# Rider project files
+.idea/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config for test results
+TestResults/
+
+# Node.js / JavaScript / TypeScript 
+node_modules/
+
+# OS generated files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+
+# Ignore Rider and JetBrains config files
+.idea/
+
+# Ignore local db
+*.mdf
+*.ldf
+
+# Ignore the generated files in this solution
+
+/Financeiro.CashFlowReport.DataModel/bin/
+/Financeiro.CashFlowReport.DataModel/obj/
+/Financial.CashflowReport.Tests/bin/
+/Financial.CashflowReport.Tests/obj/
+/Financial.CashFlowReport.API/bin/
+/Financial.CashFlowReport.API/obj/
+/Financial.CashFlowReport.Business/bin/
+/Financial.CashFlowReport.Business/obj/
+/Financial.CashFlowReport.Server/bin/
+/Financial.CashFlowReport.Server/obj/
+/Financial.CashFlowReport.Sdk/bin/
+/Financial.CashFlowReport.Sdk/sdk
