@@ -1,6 +1,6 @@
 ﻿using Financial.CashFlowReport.Business.Commands;
+using Financial.CashFlowReport.Business.Interface;
 using Financial.CashFlowReport.Business.Response;
-using Financial.CashFlowReport.Server.Protos;
 using Grpc.Core;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -11,34 +11,27 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
 {
     public class ConsolidacaoDiariaCommandHandler : IRequestHandler<ConsolidacaoDiariaCommand, ConsolidacaoDiariaResponse>
     {
-        private readonly RelatorioService.RelatorioServiceClient _relatorioClient;
-        private readonly IMongoCollection<RelatorioDiario> _relatorioCollection;
+        private readonly IRelatorioGrpcService _relatorioGrpcService;
+        private readonly IRelatorioMongoService _relatorioMongoService;
+        private readonly IRabbitMQService _rabbitMQService;
         private readonly ILogger<ConsolidacaoDiariaCommandHandler> _logger;
-        private readonly RabbitMQConsumer _rabbitMQConsumer;
 
         public ConsolidacaoDiariaCommandHandler(
-            RelatorioService.RelatorioServiceClient relatorioClient,
-            IMongoDatabase mongoDatabase,
-            ILogger<ConsolidacaoDiariaCommandHandler> logger,
-            RabbitMQConsumer rabbitMQConsumer)
+            IRelatorioGrpcService relatorioGrpcService,
+            IRelatorioMongoService relatorioMongoService,
+            IRabbitMQService rabbitMQService,
+            ILogger<ConsolidacaoDiariaCommandHandler> logger)
         {
-            _relatorioClient = relatorioClient;
-            _relatorioCollection = mongoDatabase.GetCollection<RelatorioDiario>("relatorios_diarios");
+            _relatorioGrpcService = relatorioGrpcService;
+            _relatorioMongoService = relatorioMongoService;
+            _rabbitMQService = rabbitMQService;
             _logger = logger;
-            _rabbitMQConsumer = rabbitMQConsumer;
 
-            // Inicia o consumo de mensagens RabbitMQ assim que o handler é instanciado
-            StartListeningForMessages();
+            // Inicia o consumo de mensagens RabbitMQ
+            _rabbitMQService.StartListening("queue_consolidacao_diaria", ProcessMessage);
         }
 
-        // Método para iniciar o consumo das mensagens RabbitMQ
-        public void StartListeningForMessages()
-        {
-            _logger.LogInformation("Iniciando o consumo de mensagens de RabbitMQ.");
-            _rabbitMQConsumer.StartConsuming("queue_consolidacao_diaria", ProcessMessage);
-        }
-
-        private void ProcessMessage(string message)
+        public void ProcessMessage(string message)
         {
             _logger.LogInformation($"Mensagem recebida de RabbitMQ: {message}");
 
@@ -47,41 +40,27 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
                 var lancamento = JsonConvert.DeserializeObject<LancamentoMessage>(message);
                 if (lancamento != null)
                 {
-                    _logger.LogInformation($"Processando lançamento de ID: {lancamento.Id}");
-
                     var novoLancamento = new LancamentoDataModel
                     {
-                        Id = lancamento.Id, 
+                        Id = lancamento.Id,
                         Tipo = lancamento.Tipo,
                         Valor = lancamento.Valor,
                         Descricao = lancamento.Descricao,
                         Data = lancamento.Data
                     };
 
-                    var filtro = Builders<RelatorioDiario>.Filter.Eq(r => r.Data, lancamento.Data);
+                    // Inserir ou atualizar o lançamento no MongoDB
+                    _relatorioMongoService.InsertOrUpdateLancamentoAsync(novoLancamento, lancamento.Data).Wait();
 
-                    var updateLancamento = Builders<RelatorioDiario>.Update.Push(r => r.Lancamentos, novoLancamento);
-
-                    _relatorioCollection.UpdateOne(filtro, updateLancamento, new UpdateOptions { IsUpsert = true });
-
-                    var relatorio = _relatorioCollection.Find(filtro).FirstOrDefault();
+                    // Atualizar totais de créditos e débitos no relatório diário
+                    var relatorio = _relatorioMongoService.GetRelatorioDiarioByDateAsync(lancamento.Data).Result;
                     if (relatorio != null)
                     {
                         var totalCreditos = relatorio.Lancamentos.Where(l => l.Tipo == "credito").Sum(l => l.Valor);
                         var totalDebitos = relatorio.Lancamentos.Where(l => l.Tipo == "debito").Sum(l => l.Valor);
 
-                        var updateTotais = Builders<RelatorioDiario>.Update
-                            .Set(r => r.TotalCreditos, totalCreditos)
-                            .Set(r => r.TotalDebitos, totalDebitos);
-
-                        _relatorioCollection.UpdateOne(filtro, updateTotais);
+                        _relatorioMongoService.UpdateTotalLancamentosAsync(lancamento.Data, totalCreditos, totalDebitos).Wait();
                     }
-
-                    _logger.LogInformation("Lançamento e totais salvos com sucesso no MongoDB.");
-                }
-                else
-                {
-                    _logger.LogWarning("Mensagem deserializada é nula.");
                 }
             }
             catch (Exception ex)
@@ -90,20 +69,19 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
             }
         }
 
-
         public async Task<ConsolidacaoDiariaResponse> Handle(ConsolidacaoDiariaCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var filtro = Builders<RelatorioDiario>.Filter.Eq(r => r.Data, request.Data);
-                var relatorioDiario = await _relatorioCollection.Find(filtro).FirstOrDefaultAsync(cancellationToken);
+                // Busca o relatório diário no MongoDB
+                var relatorioDiario = await _relatorioMongoService.GetRelatorioDiarioByDateAsync(request.Data);
 
                 if (relatorioDiario == null)
                 {
-                    _logger.LogInformation("Dados não encontrados no MongoDB. Consultando serviço gRPC e consolidando no PostgreSQL.");
+                    _logger.LogInformation("Dados não encontrados no MongoDB. Consultando serviço gRPC.");
 
-                    var grpcRequest = new RelatorioRequest { Data = request.Data };
-                    var grpcResponse = await _relatorioClient.ObterRelatorioConsolidadoAsync(grpcRequest, cancellationToken: cancellationToken);
+                    // Busca os dados via gRPC
+                    var grpcResponse = await _relatorioGrpcService.ObterRelatorioConsolidadoAsync(request.Data, cancellationToken);
 
                     var consolidacaoResponse = new ConsolidacaoDiariaResponse
                     {
@@ -120,18 +98,21 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
                         }).ToList()
                     };
 
+                    // Monta os lançamentos consolidados
                     var lancamentosConsolidados = grpcResponse.RelatorioLancamentos.Select(l => new LancamentoDataModel
                     {
-                        Id = Guid.NewGuid(), // Usando o mesmo Id do gRPC
+                        Id = Guid.NewGuid(),
                         Tipo = l.Tipo,
                         Valor = l.Valor,
                         Descricao = l.Descricao,
                         Data = l.Data
                     }).ToList();
 
+                    // Calculos
                     var totalCreditos = lancamentosConsolidados.Where(l => l.Tipo == "credito").Sum(l => l.Valor);
                     var totalDebitos = lancamentosConsolidados.Where(l => l.Tipo == "debito").Sum(l => l.Valor);
 
+                    // Insere ou atualiza o relatório no MongoDB
                     var novoRelatorioDiario = new RelatorioDiario
                     {
                         Data = grpcResponse.Data,
@@ -140,12 +121,12 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
                         Lancamentos = lancamentosConsolidados
                     };
 
-                    await _relatorioCollection.InsertOneAsync(novoRelatorioDiario, cancellationToken);
+                    await _relatorioMongoService.InsertOrUpdateLancamentoAsync(novoRelatorioDiario.Lancamentos.First(), novoRelatorioDiario.Data);
 
                     return consolidacaoResponse;
                 }
 
-                // Calcula o saldo consolidado a partir do MongoDB
+                // Calcula o saldo
                 var saldoConsolidado = relatorioDiario.TotalCreditos - relatorioDiario.TotalDebitos;
 
                 return new ConsolidacaoDiariaResponse
@@ -165,7 +146,7 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
             }
             catch (RpcException rpcEx)
             {
-                _logger.LogError(rpcEx, "Erro ao consultar relatório consolidado: {Message}", rpcEx.Message);
+                _logger.LogError(rpcEx, "Erro ao consultar relatório consolidado.");
                 return new ConsolidacaoDiariaResponse
                 {
                     Sucesso = false,
@@ -174,14 +155,13 @@ namespace Financial.CashFlowReport.Business.CommandHandlers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro inesperado ao consolidar relatório: {Message}", ex.Message);
+                _logger.LogError(ex, "Erro inesperado.");
                 return new ConsolidacaoDiariaResponse
                 {
                     Sucesso = false,
-                    Mensagem = "Erro inesperado ao consolidar relatório."
+                    Mensagem = "Erro inesperado."
                 };
             }
         }
-
     }
 }

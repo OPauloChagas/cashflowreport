@@ -1,5 +1,6 @@
-using Financial.CashFlowReport.Business;
 using Financial.CashFlowReport.Business.CommandHandlers;
+using Financial.CashFlowReport.Business.Interface;
+using Financial.CashFlowReport.Business.Service;
 using Financial.CashFlowReport.Sdk.Extensions;
 using Financial.CashFlowReport.Server.Services;
 using MongoDB.Driver;
@@ -8,12 +9,10 @@ using RabbitMQ.Client;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory())  
-    .AddJsonFile("Configs/appsettings.json", optional: false, reloadOnChange: true)  
-    .AddJsonFile($"Configs/appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)  
-    .AddEnvironmentVariables();  
-
-
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("Configs/appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"Configs/appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
 
 builder.Services.AddControllers();
 
@@ -31,15 +30,19 @@ builder.Services.AddScoped(sp =>
     return mongoClient.GetDatabase(mongoDatabaseName);
 });
 
+builder.Services.AddScoped<IRelatorioGrpcService, RelatorioGrpcService>();
+builder.Services.AddScoped<IRelatorioMongoService, RelatorioMongoService>();
+
 // Configuração do MediatR para os Command Handlers
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(ConsolidacaoDiariaCommandHandler).Assembly
 ));
 
-// Registra o RabbitMQConsumer
-builder.Services.AddSingleton<RabbitMQConsumer>();
 
-// **Registrar o ConsolidacaoDiariaCommandHandler no container**
+builder.Services.AddSingleton<RabbitMQConsumer>();
+builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
+
+
 builder.Services.AddScoped<ConsolidacaoDiariaCommandHandler>();
 
 builder.Services.AddSingleton<IConnectionFactory>(sp =>
@@ -53,18 +56,15 @@ builder.Services.AddSingleton<IConnectionFactory>(sp =>
     };
 });
 
-builder.Services.AddSingleton<RabbitMQConsumer>();
-
 // Configuração do gRPC SDK e serviços
-builder.Services.AddGrpcSdk();  
-builder.Services.AddGrpc();   
+builder.Services.AddGrpcSdk();
+builder.Services.AddGrpc();
 
 // Configuração de Swagger para OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
 
 // Configure o pipeline de requisição HTTP.
 if (app.Environment.IsDevelopment())
@@ -87,11 +87,16 @@ app.MapControllers();
 // Mapear serviços gRPC
 app.MapGrpcService<ReportService>();
 
-// **Inicia o consumo de mensagens RabbitMQ ao iniciar a aplicação**
-using (var scope = app.Services.CreateScope())
+// Inicia o consumo de mensagens RabbitMQ 
+var rabbitMQService = app.Services.GetRequiredService<IRabbitMQService>();
+rabbitMQService.StartListening("queue_consolidacao_diaria", message =>
 {
-    var handler = scope.ServiceProvider.GetRequiredService<ConsolidacaoDiariaCommandHandler>();
-    handler.StartListeningForMessages();  // Inicia o consumo de mensagens RabbitMQ
-}
+    // Cria um novo escopo para cada mensagem recebida
+    using (var scope = app.Services.CreateScope())
+    {
+        var handler = scope.ServiceProvider.GetRequiredService<ConsolidacaoDiariaCommandHandler>();
+        handler.ProcessMessage(message); // Processa a mensagem recebida
+    }
+});
 
 app.Run();

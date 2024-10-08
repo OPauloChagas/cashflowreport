@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{49C1929A-F87C-40E9-98E0-3483097182AD}|Financial.CashFlowReport.Business\\Financial.CashFlowReport.Business.csproj|d:\\projetos\\bancocarrefour\\financial.cashflowreport.api\\financial.cashflowreport.business\\commandhandlers\\consolidacaodiariacommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49C1929A-F87C-40E9-98E0-3483097182AD}|Financial.CashFlowReport.Business\\Financial.CashFlowReport.Business.csproj|solutionrelative:financial.cashflowreport.business\\commandhandlers\\consolidacaodiariacommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB}|Financial.CashflowReport.Tests\\Financial.CashflowReport.Tests.csproj|d:\\projetos\\bancocarrefour\\financial.cashflowreport.api\\financial.cashflowreport.tests\\consolidacaodiariacommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1654EBDC-F2B1-4C7F-B253-E32EC9A55CAB}|Financial.CashflowReport.Tests\\Financial.CashflowReport.Tests.csproj|solutionrelative:financial.cashflowreport.tests\\consolidacaodiariacommandhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49C1929A-F87C-40E9-98E0-3483097182AD}|Financial.CashFlowReport.Business\\Financial.CashFlowReport.Business.csproj|d:\\projetos\\bancocarrefour\\financial.cashflowreport.api\\financial.cashflowreport.business\\commands\\consolidacaodiariacommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{49C1929A-F87C-40E9-98E0-3483097182AD}|Financial.CashFlowReport.Business\\Financial.CashFlowReport.Business.csproj|solutionrelative:financial.cashflowreport.business\\commands\\consolidacaodiariacommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1304,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 22,
           "Children": [
             {
               "$type": "Bookmark",
@@ -94,6 +107,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConsolidacaoDiariaCommandHandlerTests.cs",
+              "DocumentMoniker": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashflowReport.Tests\\ConsolidacaoDiariaCommandHandlerTests.cs",
+              "RelativeDocumentMoniker": "Financial.CashflowReport.Tests\\ConsolidacaoDiariaCommandHandlerTests.cs",
+              "ToolTip": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashflowReport.Tests\\ConsolidacaoDiariaCommandHandlerTests.cs",
+              "RelativeToolTip": "Financial.CashflowReport.Tests\\ConsolidacaoDiariaCommandHandlerTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T01:34:37.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsolidacaoDiariaCommandHandler.cs",
+              "DocumentMoniker": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Business\\CommandHandlers\\ConsolidacaoDiariaCommandHandler.cs",
+              "RelativeDocumentMoniker": "Financial.CashFlowReport.Business\\CommandHandlers\\ConsolidacaoDiariaCommandHandler.cs",
+              "ToolTip": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Business\\CommandHandlers\\ConsolidacaoDiariaCommandHandler.cs",
+              "RelativeToolTip": "Financial.CashFlowReport.Business\\CommandHandlers\\ConsolidacaoDiariaCommandHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T01:51:53.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ConsolidacaoDiariaCommand.cs",
+              "DocumentMoniker": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Business\\Commands\\ConsolidacaoDiariaCommand.cs",
+              "RelativeDocumentMoniker": "Financial.CashFlowReport.Business\\Commands\\ConsolidacaoDiariaCommand.cs",
+              "ToolTip": "D:\\Projetos\\BancoCarrefour\\Financial.CashFlowReport.API\\Financial.CashFlowReport.Business\\Commands\\ConsolidacaoDiariaCommand.cs",
+              "RelativeToolTip": "Financial.CashFlowReport.Business\\Commands\\ConsolidacaoDiariaCommand.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-08T01:51:55.696Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -101,10 +153,6 @@
           "DockedWidth": 200,
           "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -160,6 +208,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:149:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             }
           ]
         }

@@ -22,7 +22,7 @@ namespace Financial.CashflowReport.Tests
             for (int i = 0; i < numeroDeRequisicoes; i++)
             {
                 // Cria uma requisição para cada task
-                tasks[i] = _client.GetAsync("?data=2024-09-27"); 
+                tasks[i] = _client.GetAsync("?data=2024-10-07"); 
             }
 
             await Task.WhenAll(tasks);
