@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Financial.CashFlowReport.API.props" />
-</Project>
